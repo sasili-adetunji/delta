@@ -22,7 +22,8 @@ nltk.download('stopwords')
 
 
 # Init
-newsapi = NewsApiClient(api_key='8402feb52391437f80142060bb01fcb7')
+key = os.environ.get("API_KEY")
+newsapi = NewsApiClient(api_key=key)
 
 stop_words = set(stopwords.words('english'))
 
@@ -69,25 +70,25 @@ def get_articles(keywords):
         source_url = all_articles['articles'][0]['url']
         save_files(content, source)
 
-        return_dict = {
-            "news": [{
-                "ranking": '',
-                "content": "",
-                "reference": ""
-            },
-                "news": [{
-                "ranking": "",
-                "content": "",
-                "reference": ""
-            },
-                "news": [{
-                "ranking": '',
-                "content": "",
-                "reference": ""
-            }
-            ]
-        }
-        return {k: f(v) for k, v in d1.items()}
+        # return_dict = {
+        #     "news": [{
+        #         "ranking": '',
+        #         "content": "",
+        #         "reference": ""
+        #     },
+        #         "news": [{
+        #         "ranking": "",
+        #         "content": "",
+        #         "reference": ""
+        #     },
+        #         "news": [{
+        #         "ranking": '',
+        #         "content": "",
+        #         "reference": ""
+        #     }
+        #     ]
+        # }
+        # return {k: f(v) for k, v in d1.items()}
         # requests_url(source_url)
 
 def return_news(keywords):
