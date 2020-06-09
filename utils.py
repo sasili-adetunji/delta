@@ -45,7 +45,7 @@ def inverse_doc_frequency(files, word):
     doc_count = 0
     for file in files:
         doc_count += 1
-        my_text = read_csv_files(file)
+        my_text = read_files(file)
         my_voc = clean_text(my_text)
         if word in my_voc:
             word_count += 1
@@ -95,6 +95,3 @@ def return_news(keywords):
     get_articles(keywords)
     my_files = load_files()
     doc_freq = inverse_doc_frequency(my_files, 'word')
-    response = {
-
-    }

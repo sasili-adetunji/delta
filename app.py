@@ -1,6 +1,6 @@
 #!flask/bin/python
 from flask import Flask, request, jsonify, abort
-from utils import return_news
+from utils import return_news, get_articles
 
 app = Flask(__name__)
 
@@ -12,12 +12,8 @@ def index():
         return jsonify({'error': 'keywords is requirewd'}), 400
     keywords = request.json['keywords']
 
-    return_news(keywords)
-    task = {
-        'keywords': request.json['keywords'],
-        'done': False
-    }
-    return jsonify({'task': task}), 201
+    response = get_articles(keywords)
+    return jsonify(response), 201
 
 if __name__ == '__main__':
     app.run(debug=True)
