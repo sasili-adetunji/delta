@@ -53,7 +53,8 @@ def inverse_doc_frequency(files, word):
 
 def save_files(content, source):
     with open('sources/{}.txt'.format(source), mode='w') as news_file:
-        news_file.write(content)
+        if content is not None:
+            news_file.write(content)
 
 # def requests_url(url):
 #     response = requests.get(url)
@@ -63,13 +64,18 @@ def save_files(content, source):
 #     save_csv_files(content, source)
 
 def get_articles(keywords):
+    news = []
+    source = []
     for word in keywords:
         all_articles = newsapi.get_everything(q=word, sources='bbc-news,cnn,fox-news', language='en')
         content = all_articles['articles'][0]['content']
         source = all_articles['articles'][0]['source']['id']
         source_url = all_articles['articles'][0]['url']
+        news.append(content)
+        # source.append(source_url)
         save_files(content, source)
-
+    
+    return {"news" : [c for c in news]}
         # return_dict = {
         #     "news": [{
         #         "ranking": '',
